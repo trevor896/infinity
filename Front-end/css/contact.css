@@ -1,0 +1,267 @@
+:root {
+  --bg-color: #0a1a1f; /* Dark Navy background color */
+  --bg-gradient: linear-gradient(135deg, #0a1a1f, #0f3d3e);
+  --primary-color: #00df82; /* emerald green accent */
+  --secondary-color: #00b86b; /* Darker green accent */
+  --text-color: #ffffff; /* clean white */
+  --muted-text: #b0bec5; /* soft grey */
+
+  /* Font families */
+  --font-heading: "Nunito", sans-serif;
+  --font-body: "lato", sans-serif;
+  --font-monospace: "Fira Code", monospace;
+
+  /* font sizes */
+  --fs-base: 1rem; /* body text */
+  --fs-lg: 1.5rem; /* section headings */
+  --fs-sm: 0.875rem; /* captions, small notes */
+  --fs-md: 1.125rem; /* subheadings or emphasized text */
+  --fs-xl: 2.25rem; /* page titles */
+  --fs-xxl: 3rem; /* hero titles */
+
+  /* font weights */
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* font spacing */
+  --line-height: 1.6;
+  --letter-spacing: 0.5px;
+
+  /* responsive font sizes using clamp(min, max preferred) */
+  --fs-responsive-sm: clamp(0.875rem, 1vw, 1rem); /* small text, notes */
+  --fs-responsive-md: clamp(1rem, 1.5vw, 1.125rem); /* body text, subheadings */
+  --fs-responsive-lg: clamp(1.25rem, 2vw, 1.5rem); /* section headings */
+  --fs-responsive-xl: clamp(1.5rem, 2.5vw, 2.25rem); /* page titles */
+  --fs-responsive-xxl: clamp(2rem, 3vw, 3rem); /* hero titles */
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* spacing systems */
+  --spacing-xs: 0.5rem; /* tiny spacing for small elements */
+  --spacing-sm: 1rem; /* small spacing for buttons, form elements */
+  --spacing-md: 1.5rem; /* medium spacing for section dividers */
+  --spacing-lg: 2rem; /* large spacing for major section breaks */
+  --spacing-xl: 3rem; /* extra-large spacing for significant layout gaps */
+}
+
+/* Contact page styles */
+.contact-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+}
+
+/* Left column */
+.contact-intro h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-responsive-xl);
+  margin: 0 0 var(--spacing-sm);
+  font-weight: var(--fw-bold);
+  color: var(--text-color);
+}
+
+.contact-intro p {
+  margin: 0 0 var(--spacing-lg);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: var(--line-height);
+  max-width: 52ch;
+}
+
+.contact-cards {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.contact-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-radius: 18px;
+  border: 1px solid rgba(0, 223, 130, 0.22);
+  background: rgba(255, 255, 255, 0.02);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.contact-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 223, 130, 0.1);
+  border: 1px solid rgba(0, 223, 130, 0.28);
+  color: var(--primary-color);
+  flex: 0 0 auto;
+}
+
+.contact-card__label {
+  font-weight: var(--fw-semibold);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.35rem;
+  font-size: var(--fs-sm);
+}
+
+.contact-card__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-card__link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: var(--fw-medium);
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.contact-card__link:hover {
+  color: var(--secondary-color);
+  transform: translateY(-1px);
+}
+
+.contact-card__text {
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: var(--fw-medium);
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+  border-color: rgba(0, 223, 130, 0.45);
+}
+
+/* Right column form */
+.form-card {
+  padding: var(--spacing-lg);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 223, 130, 0.22);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
+}
+
+.contact-form h3 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  margin: 0 0 var(--spacing-lg);
+  font-weight: var(--fw-bold);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: var(--spacing-md);
+}
+
+label {
+  font-weight: var(--fw-semibold);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--fs-sm);
+}
+
+input,
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-color);
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  font-family: var(--font-body);
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgba(0, 223, 130, 0.55);
+  box-shadow: 0 0 0 4px rgba(0, 223, 130, 0.12);
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+  border-radius: 999px;
+  padding: 0.95rem 1.2rem;
+  border: 1px solid rgba(0, 223, 130, 0.45);
+  background: rgba(0, 223, 130, 0.12);
+  color: var(--text-color);
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 223, 130, 0.22);
+  border-color: rgba(0, 223, 130, 0.8);
+}
+
+.form-status {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  min-height: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.form-status--pending {
+  color: #f0c419;
+}
+
+.form-status--success {
+  color: #7bed9f;
+}
+
+.form-status--error {
+  color: #ff6b6b;
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 920px) {
+  .contact-page {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-xl) var(--spacing-xs);
+  }
+
+  .contact-intro p {
+    margin-bottom: var(--spacing-md);
+  }
+}
