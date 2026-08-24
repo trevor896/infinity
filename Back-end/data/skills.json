@@ -1,14 +1,14 @@
 [
   {
     "category": "Frontend",
-    "items": ["HTML", "CSS", "JavaScript", "React"]
+    "items": ["HTML", "CSS", "JavaScript"]
   },
   {
-    "category": "Backend",
-    "items": ["Node.js", "Express", "MongoDB"]
+    "category": "Analytics",
+    "items": ["Excel", "Power BI"]
   },
   {
-    "category": "Tools",
-    "items": ["Git", "VS Code", "Figma"]
+    "category": "Design",
+    "items": ["Figma", "Canva"]
   }
 ]

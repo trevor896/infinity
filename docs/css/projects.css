@@ -219,6 +219,30 @@ body {
   line-height: 1.55;
 }
 
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: var(--primary-color);
+  color: #06100d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
 .project-lightbox {
   position: fixed;
   inset: 0;

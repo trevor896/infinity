@@ -9,9 +9,9 @@
   },
   {
     "id": "project-2",
-    "title": "Blog Platform",
-    "description": "A full-stack blog platform with authentication and CRUD operations.",
-    "tags": ["Node.js", "Express", "MongoDB"],
+    "title": "Blog Interface",
+    "description": "A front-end blog interface built with HTML, CSS, and JavaScript.",
+    "tags": ["HTML", "CSS", "JavaScript"],
     "liveUrl": "https://blog.example.com",
     "repoUrl": "https://github.com/username/blog-platform"
   }

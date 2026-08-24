@@ -13,7 +13,7 @@ const FALLBACK_PROJECTS = [
   {
     id: 'project-2',
     title: 'Brand Identity Kit',
-    description: 'A visual identity package with logo explorations, mockups, and presentation-ready marketing assets.',
+    description: 'A visual identity study with logo explorations, mockups, and presentation-ready marketing assets.',
     category: 'Design',
     tags: ['Figma', 'Branding', 'UI/UX'],
     liveUrl: '#',
@@ -126,7 +126,7 @@ async function submitContactForm(event) {
     status.className = 'form-status form-status--success';
   } catch (error) {
     const errorMessage = error instanceof TypeError && error.message === 'Failed to fetch'
-      ? 'The contact server is unavailable. Start the backend and try again.'
+      ? 'The contact service is unavailable. Please try again later.'
       : `Failed to send message. ${error.message}`;
     status.textContent = errorMessage;
     status.className = 'form-status form-status--error';

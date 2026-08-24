@@ -357,6 +357,17 @@ h1 .highlight {
     border-color 0.25s ease;
 }
 
+.about-me-text .about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.about-me-text .about-actions > .see-more,
+.about-me-text .about-actions > .download-cv-btn {
+  min-height: 2.75rem;
+}
+
 /* See more / Download resume buttons (from index.html) */
 .about-me-text .see-more {
   background-color: var(--primary-color);
@@ -388,6 +399,7 @@ h1 .highlight {
 .experience-card,
 .projects-card {
   flex: 1;
+  min-width: 0;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(0, 223, 130, 0.18);
   border-radius: 16px;
@@ -614,9 +626,11 @@ h1 .highlight {
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--spacing-sm);
+  flex-wrap: wrap;
 }
 
 .package-heading h4 {
+  min-width: 0;
   margin: 0;
   font-family: var(--font-heading);
   font-size: 1.25rem;
@@ -625,6 +639,8 @@ h1 .highlight {
 }
 
 .package-heading p {
+  min-width: 0;
+  max-width: 100%;
   margin: 0;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
@@ -632,7 +648,9 @@ h1 .highlight {
   color: var(--primary-color);
   font-size: var(--fs-sm);
   font-weight: var(--fw-semibold);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
   background: rgba(0, 223, 130, 0.06);
 }
 
@@ -1033,10 +1051,14 @@ h1 .highlight {
 
 /* Projects responsiveness */
 @media (max-width: 720px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+
   .main-content {
     flex-direction: column;
     align-items: stretch;
-    padding: var(--spacing-lg) var(--spacing-sm);
+    padding: var(--spacing-lg) var(--spacing-sm) var(--spacing-xl);
   }
 
   .main-content > div {
@@ -1059,8 +1081,93 @@ h1 .highlight {
     gap: var(--spacing-md);
   }
 
+  .about-me-text .about-actions {
+    gap: 0.5rem;
+  }
+
+  .about-me-text .about-actions > .see-more,
+  .about-me-text .about-actions > .download-cv-btn {
+    flex: 0 0 calc(50% - 0.25rem);
+    width: calc(50% - 0.25rem);
+    min-width: 0;
+    margin-left: 0;
+    font-size: var(--fs-sm);
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+    white-space: nowrap;
+  }
+
+  .main-content .text .my-work-btn {
+    margin-left: 0.4rem;
+  }
+
+  .main-content .text .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .main-content .text .social-links a {
+    margin: 0;
+  }
+
   .about-me-navbar {
     width: 100%;
+  }
+
+  .about-me-navbar .tab-list {
+    gap: 0.35rem;
+  }
+
+  .about-me-navbar .tab-link {
+    flex: 1 1 30%;
+    min-height: 2.75rem;
+    padding: 0.65rem 0.35rem;
+    text-align: center;
+  }
+
+  .stats-card {
+    gap: 0.75rem;
+  }
+
+  .experience-card,
+  .projects-card {
+    padding: 0.75rem;
+  }
+
+  .experience-card p,
+  .projects-card p {
+    overflow-wrap: anywhere;
+  }
+
+  .package-heading {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .package-heading p {
+    align-self: flex-end;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 900px) {
+  .main-content {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .about-me {
+    margin-left: var(--spacing-md);
+    margin-right: var(--spacing-md);
+  }
+
+  .about-me-text .about-actions > .see-more,
+  .about-me-text .about-actions > .download-cv-btn {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .about-me-text .about-actions > .download-cv-btn {
+    margin-left: 0;
   }
 }
 
@@ -1076,10 +1183,21 @@ h1 .highlight {
   .home-project-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
+
+  .home-project-showcase {
+    padding: 0.75rem;
+    border-radius: 16px;
+  }
 }
 
-/* Services pricing responsive */
-@media (max-width: 992px) {
+/* What I Offer responsive grid */
+@media (min-width: 721px) and (max-width: 992px) {
+  .services .service-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
   .services .service-cards {
     grid-template-columns: 1fr;
   }

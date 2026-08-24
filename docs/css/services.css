@@ -255,7 +255,15 @@ body {
 
 @media (max-width: 640px) {
   .services-page {
-    padding: var(--spacing-lg) var(--spacing-sm);
+    padding: var(--spacing-lg) 0.75rem;
+  }
+
+  .services-title {
+    font-size: 2rem;
+  }
+
+  .services-hero {
+    margin-bottom: var(--spacing-lg);
   }
 
   .flashcard-grid {
@@ -268,6 +276,32 @@ body {
 
   .flashcard-btn {
     width: 100%;
+  }
+
+  .service-modal {
+    padding: 0.5rem;
+  }
+
+  .service-modal__panel {
+    max-height: 88vh;
+    border-radius: 16px;
+  }
+
+  .service-modal__header,
+  .service-modal__content {
+    padding: 1rem;
+  }
+
+  .service-modal__header {
+    gap: 0.75rem;
+  }
+
+  .service-modal__title {
+    font-size: 1.35rem;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
   }
 }
 

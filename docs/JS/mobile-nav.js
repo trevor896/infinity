@@ -1,5 +1,5 @@
 const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenu = document.querySelector('.nav-links');
 
 if (mobileMenuToggle && mobileMenu) {
     const closeMobileMenu = () => {

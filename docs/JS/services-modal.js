@@ -33,28 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>Deployment: sent via download link / email attachment (placeholder).</li>
           </ul>
         </div>
-        <div class="svc-pricing">
-          <h3>Pricing tiers</h3>
-          <div class="pricing-grid">
-            <div class="pricing-tier">
-              <h4>Basic</h4>
-              <p class="price">$99</p>
-              <p>One concept direction, quick polish, single poster set.</p>
-              <p class="note">Personalization: limited revisions.</p>
-            </div>
-            <div class="pricing-tier">
-              <h4>Standard</h4>
-              <p class="price">$199</p>
-              <p>Two concepts, logo + poster set, typography refinement.</p>
-              <p class="note">Personalization: moderate revisions + variants.</p>
-            </div>
-            <div class="pricing-tier premium">
-              <h4>Premium</h4>
-              <p class="price">$349</p>
-              <p>Three concepts, full brand consistency pass, extra formats.</p>
-              <p class="note">Best for complex themes & higher complexity.</p>
-            </div>
-          </div>
+        <div class="svc-section">
+          <h3>Typical focus</h3>
+          <ul>
+            <li>Logo and poster composition</li>
+            <li>Typography, colour, and visual hierarchy</li>
+            <li>Digital and print-ready exports</li>
+          </ul>
         </div>
       `
     },
@@ -82,28 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>File naming: campaign-based (placeholder).</li>
           </ul>
         </div>
-        <div class="svc-pricing">
-          <h3>Pricing tiers</h3>
-          <div class="pricing-grid">
-            <div class="pricing-tier">
-              <h4>Basic</h4>
-              <p class="price">$79</p>
-              <p>3 posts, single style direction.</p>
-              <p class="note">Personalization: light adjustments.</p>
-            </div>
-            <div class="pricing-tier">
-              <h4>Standard</h4>
-              <p class="price">$149</p>
-              <p>6 posts + 1 variant style, optimized spacing.</p>
-              <p class="note">Personalization: moderate revisions.</p>
-            </div>
-            <div class="pricing-tier premium">
-              <h4>Premium</h4>
-              <p class="price">$269</p>
-              <p>10–14 posts, campaign kit + reusable templates.</p>
-              <p class="note">Best for multi-theme or ongoing content.</p>
-            </div>
-          </div>
+        <div class="svc-section">
+          <h3>Typical focus</h3>
+          <ul>
+            <li>Social media post layouts</li>
+            <li>Consistent colour and typography</li>
+            <li>Clear, mobile-friendly visual communication</li>
+          </ul>
         </div>
       `
     },
@@ -131,33 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>Deployment: shared through Figma or email link.</li>
           </ul>
         </div>
-        <div class="svc-pricing">
-          <h3>Pricing tiers</h3>
-          <div class="pricing-grid">
-            <div class="pricing-tier">
-              <h4>Basic</h4>
-              <p class="price">$129</p>
-              <p>1–2 core screens + basic flow outline.</p>
-              <p class="note">Personalization: limited scope.</p>
-            </div>
-            <div class="pricing-tier">
-              <h4>Standard</h4>
-              <p class="price">$249</p>
-              <p>5–7 screens + component set + styling pass.</p>
-              <p class="note">Personalization: moderate revisions.</p>
-            </div>
-            <div class="pricing-tier premium">
-              <h4>Premium</h4>
-              <p class="price">$499</p>
-              <p>Full design system support + extended states & handoff.</p>
-              <p class="note">Best for complex product flows.</p>
-            </div>
-          </div>
+        <div class="svc-section">
+          <h3>Typical focus</h3>
+          <ul>
+            <li>Wireframes and user flows</li>
+            <li>Layout, spacing, and visual hierarchy</li>
+            <li>Figma interface concepts</li>
+          </ul>
         </div>
       `
     },
     web: {
-      title: 'Website Development',
+      title: 'Front-end Development',
       html: `
         <div class="svc-section">
           <h3>Process breakdown</h3>
@@ -180,77 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>Access: repo link + brief handover.</li>
           </ul>
         </div>
-        <div class="svc-pricing">
-          <h3>Pricing tiers</h3>
-          <div class="pricing-grid">
-            <div class="pricing-tier">
-              <h4>Basic</h4>
-              <p class="price">$199</p>
-              <p>1 landing page + responsive styling.</p>
-              <p class="note">Personalization: limited sections.</p>
-            </div>
-            <div class="pricing-tier">
-              <h4>Standard</h4>
-              <p class="price">$399</p>
-              <p>Up to 3–4 pages + forms + animations (light).</p>
-              <p class="note">Personalization: moderate revisions.</p>
-            </div>
-            <div class="pricing-tier premium">
-              <h4>Premium</h4>
-              <p class="price">$749</p>
-              <p>5+ pages + advanced interactions + full polish.</p>
-              <p class="note">Best for higher complexity & custom components.</p>
-            </div>
-          </div>
-        </div>
-      `
-    },
-    automation: {
-      title: 'AI & Automation Integrations',
-      html: `
         <div class="svc-section">
-          <h3>Process breakdown</h3>
-          <ol>
-            <li>Use-case discovery: where time is wasted.</li>
-            <li>Workflow mapping: inputs, outputs, triggers.</li>
-            <li>Implementation: integrate models/services safely.</li>
-            <li>Testing + iteration: verify accuracy and reliability.</li>
-          </ol>
-        </div>
-        <div class="svc-section">
-          <h3>Thought process</h3>
-          <p>We design automation around real constraints: latency, privacy, and error handling. The system should be predictable and easy to maintain.</p>
-        </div>
-        <div class="svc-section">
-          <h3>Delivery details</h3>
+          <h3>Typical focus</h3>
           <ul>
-            <li>Code + documentation (placeholder).</li>
-            <li>Deployment method: serverless/hosted integration (placeholder).</li>
-            <li>Access: environment setup notes for handover.</li>
+            <li>Semantic HTML and responsive CSS</li>
+            <li>Basic JavaScript interactions</li>
+            <li>Accessible, mobile-friendly page layouts</li>
           </ul>
-        </div>
-        <div class="svc-pricing">
-          <h3>Pricing tiers</h3>
-          <div class="pricing-grid">
-            <div class="pricing-tier">
-              <h4>Basic</h4>
-              <p class="price">$249</p>
-              <p>Single workflow automation with limited scope.</p>
-              <p class="note">Personalization: small adjustments.</p>
-            </div>
-            <div class="pricing-tier">
-              <h4>Standard</h4>
-              <p class="price">$499</p>
-              <p>Multi-step automation with improved reliability.</p>
-              <p class="note">Personalization: moderate complexity.</p>
-            </div>
-            <div class="pricing-tier premium">
-              <h4>Premium</h4>
-              <p class="price">$999</p>
-              <p>AI-assisted system with monitoring and extended flows.</p>
-              <p class="note">Best for higher complexity use-cases.</p>
-            </div>
-          </div>
         </div>
       `
     },
@@ -278,80 +169,16 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>Documentation: KPI definitions & filters guidance.</li>
           </ul>
         </div>
-        <div class="svc-pricing">
-          <h3>Pricing tiers</h3>
-          <div class="pricing-grid">
-            <div class="pricing-tier">
-              <h4>Basic</h4>
-              <p class="price">$149</p>
-              <p>1–2 dashboards with limited filters.</p>
-              <p class="note">Personalization: light.</p>
-            </div>
-            <div class="pricing-tier">
-              <h4>Standard</h4>
-              <p class="price">$299</p>
-              <p>3–4 dashboards + KPI consistency pass.</p>
-              <p class="note">Personalization: moderate revisions.</p>
-            </div>
-            <div class="pricing-tier premium">
-              <h4>Premium</h4>
-              <p class="price">$599</p>
-              <p>Advanced modeling, drill-downs, and refined UX.</p>
-              <p class="note">Best for complex reporting needs.</p>
-            </div>
-          </div>
+        <div class="svc-section">
+          <h3>Typical focus</h3>
+          <ul>
+            <li>Clear dashboard and report layouts</li>
+            <li>Basic data presentation and KPI organisation</li>
+            <li>Readable charts and visual summaries</li>
+          </ul>
         </div>
       `
     },
-    consult: {
-      title: 'Product Design Consultation',
-      html: `
-        <div class="svc-section">
-          <h3>Process breakdown</h3>
-          <ol>
-            <li>Review: UX audit and quick heuristics checklist.</li>
-            <li>Flow mapping: identify bottlenecks and drop-offs.</li>
-            <li>Recommendations: prioritized changes with rationale.</li>
-            <li>Next steps: plan and suggested iteration cadence.</li>
-          </ol>
-        </div>
-        <div class="svc-section">
-          <h3>Thought process</h3>
-          <p>We focus on what changes outcomes. Recommendations are grounded in usability principles, clarity, and reducing cognitive load.</p>
-        </div>
-        <div class="svc-section">
-          <h3>Delivery details</h3>
-          <ul>
-            <li>Deliverables: audit notes + roadmap document (placeholder).</li>
-            <li>Optional: Figma annotations or example screens.</li>
-            <li>Deployment: shared PDF/Docs link.</li>
-          </ul>
-        </div>
-        <div class="svc-pricing">
-          <h3>Pricing tiers</h3>
-          <div class="pricing-grid">
-            <div class="pricing-tier">
-              <h4>Basic</h4>
-              <p class="price">$99</p>
-              <p>Quick audit + top 5 recommendations.</p>
-              <p class="note">Personalization: light.</p>
-            </div>
-            <div class="pricing-tier">
-              <h4>Standard</h4>
-              <p class="price">$199</p>
-              <p>Deep audit + prioritized roadmap.</p>
-              <p class="note">Personalization: moderate.</p>
-            </div>
-            <div class="pricing-tier premium">
-              <h4>Premium</h4>
-              <p class="price">$349</p>
-              <p>Roadmap + example wireframes and iterations planning.</p>
-              <p class="note">Best for multi-flow products.</p>
-            </div>
-          </div>
-        </div>
-      `
-    }
   };
 
   function openByKey(key) {
