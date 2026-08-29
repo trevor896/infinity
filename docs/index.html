@@ -147,6 +147,17 @@
 
     </section>
 
+    <section class="portfolio-overview reveal" id="portfolio-overview">
+        <div class="section-heading-row">
+            <div>
+                <p class="section-kicker">Portfolio snapshot</p>
+                <h2>Built for clarity, trust, and growth</h2>
+            </div>
+            <a href="projects.html" class="inline-link">View projects</a>
+        </div>
+        <div id="portfolio-overview-grid" class="portfolio-overview-grid"></div>
+    </section>
+
     <!--services section-->
     <section class="services reveal">
         <h2>What I Offer</h2>
@@ -355,6 +366,43 @@
     <script src="JS/mobile-nav.js"></script>
     <script src="JS/reveal.js"></script>
     <script>
+        async function populatePortfolioOverview() {
+            const container = document.getElementById('portfolio-overview-grid');
+            if (!container) return;
+
+            try {
+                const response = await fetch('/api/site/overview');
+                if (!response.ok) throw new Error('Unable to load overview');
+                const items = await response.json();
+                container.innerHTML = items.map((item) => `
+                    <article class="portfolio-overview-card">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                        <span class="metric">${item.metric}</span>
+                    </article>
+                `).join('');
+            } catch (error) {
+                container.innerHTML = `
+                    <article class="portfolio-overview-card">
+                        <h3>User-centered design</h3>
+                        <p>Interfaces designed around clarity, readability, and conversion-focused journeys.</p>
+                        <span class="metric">UX-first</span>
+                    </article>
+                    <article class="portfolio-overview-card">
+                        <h3>Fast front-end delivery</h3>
+                        <p>Clean, lightweight markup and assets that load quickly across devices.</p>
+                        <span class="metric">Responsive</span>
+                    </article>
+                    <article class="portfolio-overview-card">
+                        <h3>Reliable backend support</h3>
+                        <p>Structured API routes, fallback data, and safe contact handling for production readiness.</p>
+                        <span class="metric">Deployable</span>
+                    </article>
+                `;
+            }
+        }
+
+        populatePortfolioOverview();
         const tabLinks = document.querySelectorAll('.tab-link');
         const tabPanels = document.querySelectorAll('.tab-content');
 

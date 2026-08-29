@@ -1,4 +1,19 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = (() => {
+  if (typeof window === 'undefined') {
+    return 'http://localhost:5000/api';
+  }
+
+  if (window.location.protocol === 'file:') {
+    return 'http://localhost:5000/api';
+  }
+
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    return `${window.location.protocol}//${window.location.hostname}:5000/api`;
+  }
+
+  return '/api';
+})();
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FALLBACK_PROJECTS = [
   {
@@ -31,7 +46,7 @@ const FALLBACK_PROJECTS = [
 ];
 
 async function apiGet(path) {
-  const response = await fetch(`${API_BASE}${path}`);
+  const response = await fetch(`${API_BASE}${path}`, { cache: 'no-store' });
   if (!response.ok) {
     throw new Error(`API request failed: ${response.status}`);
   }
@@ -44,7 +59,8 @@ async function apiPost(path, data) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
+    cache: 'no-store'
   });
   if (!response.ok) {
     const errorData = await response.json().catch(() => null);
@@ -54,7 +70,7 @@ async function apiPost(path, data) {
 }
 
 function formatProjectCard(project) {
-  const tags = project.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join('');
+  const tags = (project.tags || []).map((tag) => `<span class="project-tag">${tag}</span>`).join('');
   return `
     <article class="project-card">
       <div class="project-card__image">
