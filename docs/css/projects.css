@@ -372,3 +372,71 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 }
+
+/* Scroll reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animations for cards */
+.reveal.is-visible .compact-card {
+  animation: cardReveal 600ms ease both;
+}
+
+.reveal.is-visible .compact-card:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+.reveal.is-visible .compact-card:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.reveal.is-visible .compact-card:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+.reveal.is-visible .compact-card:nth-child(4) {
+  animation-delay: 400ms;
+}
+
+.reveal.is-visible .compact-card:nth-child(5) {
+  animation-delay: 500ms;
+}
+
+.reveal.is-visible .compact-card:nth-child(6) {
+  animation-delay: 600ms;
+}
+
+@keyframes cardReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .reveal.is-visible .compact-card {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

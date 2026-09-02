@@ -177,12 +177,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>Readable charts and visual summaries</li>
           </ul>
         </div>
-      `
-    },
   };
+
+  let previouslyFocusedElement = null;
 
   function openByKey(key) {
     const tpl = templates[key];
+
+    // Store the element that was focused before opening the modal
+    previouslyFocusedElement = document.activeElement;
 
     if (!tpl) {
       modalTitle.textContent = 'Service unavailable';
@@ -190,20 +193,32 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.hidden = false;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
-      return;
+    } else {
+      modalTitle.textContent = tpl.title;
+      modalContent.innerHTML = tpl.html;
+      modal.hidden = false;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
     }
 
-    modalTitle.textContent = tpl.title;
-    modalContent.innerHTML = tpl.html;
-    modal.hidden = false;
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
+    // Focus the close button for keyboard users
+    setTimeout(() => {
+      const closeBtn = modal.querySelector('[data-close-btn="true"]');
+      if (closeBtn) {
+        closeBtn.focus();
+      }
+    }, 0);
   }
 
   function closeModal() {
     modal.hidden = true;
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
+    
+    // Return focus to the element that opened the modal
+    if (previouslyFocusedElement) {
+      setTimeout(() => previouslyFocusedElement.focus(), 0);
+    }
   }
 
 

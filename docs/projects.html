@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/projects.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header>
         <nav class="navbar">
 
@@ -33,7 +35,7 @@
             </div>
         </nav>
     </header>
-    <main class="projects-page">
+    <main class="projects-page" id="main-content">
         <header class="projects-hero">
             <p class="projects-intro">Selected work</p>
             <h1 class="projects-title">Projects</h1>
@@ -42,8 +44,7 @@
 
         <nav class="projects-navbar" aria-label="Project categories">
             <ul>
-                <li><a href="#logo-showcase" class="active">All</a></li>
-                <li><a href="#web-showcase">Web</a></li>
+                <li><a href="#web-showcase" class="active">Web</a></li>
                 <li><a href="#analytics-showcase">Analytics</a></li>
                 <li><a href="#logo-showcase">Logo</a></li>
                 <li><a href="#poster-showcase">Poster</a></li>
@@ -51,7 +52,7 @@
             </ul>
         </nav>
 
-        <section class="project-showcase" id="web-showcase" aria-labelledby="web-showcase-title">
+        <section class="project-showcase reveal" id="web-showcase" aria-labelledby="web-showcase-title">
             <div class="section-heading">
                 <p class="section-pill">Web</p>
                 <h2 id="web-showcase-title">Website projects</h2>
@@ -87,7 +88,7 @@
             </div>
         </section>
 
-        <section class="project-showcase" id="logo-showcase" aria-labelledby="logo-showcase-title">
+        <section class="project-showcase reveal" id="logo-showcase" aria-labelledby="logo-showcase-title">
             <div class="section-heading">
                 <p class="section-pill">Logo</p>
                 <h2 id="logo-showcase-title">Logo concepts</h2>
@@ -136,7 +137,7 @@
             </div>
         </section>
 
-        <section class="project-showcase" id="poster-showcase" aria-labelledby="poster-showcase-title">
+        <section class="project-showcase reveal" id="poster-showcase" aria-labelledby="poster-showcase-title">
             <div class="section-heading">
                 <p class="section-pill">Poster</p>
                 <h2 id="poster-showcase-title">Poster designs</h2>
@@ -177,7 +178,7 @@
             </div>
         </section>
 
-        <section class="project-showcase" id="uiux-showcase" aria-labelledby="uiux-showcase-title">
+        <section class="project-showcase reveal" id="uiux-showcase" aria-labelledby="uiux-showcase-title">
             <div class="section-heading">
                 <p class="section-pill">UI/UX</p>
                 <h2 id="uiux-showcase-title">UI/UX designs</h2>
@@ -210,7 +211,7 @@
             </div>
         </section>
 
-        <section class="project-showcase" id="analytics-showcase" aria-labelledby="analytics-showcase-title">
+        <section class="project-showcase reveal" id="analytics-showcase" aria-labelledby="analytics-showcase-title">
             <div class="section-heading">
                 <p class="section-pill">Analytics</p>
                 <h2 id="analytics-showcase-title">Analytics visuals</h2>
@@ -424,5 +425,6 @@
             });
         });
     </script>
+    <script defer src="JS/reveal.js"></script>
     <script src="JS/mobile-nav.js"></script>
 </body>

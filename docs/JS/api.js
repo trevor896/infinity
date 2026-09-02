@@ -162,13 +162,21 @@ function initLogoGalleryModal() {
 
   if (!modalImage || !modalTitle || !modalCaption || !closeButton || cards.length === 0) return;
 
+  let previouslyFocusedElement = null;
+
   const openModal = (src, title, caption) => {
+    // Store the element that was focused before opening the modal
+    previouslyFocusedElement = document.activeElement;
+    
     modalImage.src = src;
     modalImage.alt = title;
     modalTitle.textContent = title;
     modalCaption.textContent = caption;
     modal.classList.add('logo-modal--open');
     modal.setAttribute('aria-hidden', 'false');
+    
+    // Focus the close button for keyboard users
+    setTimeout(() => closeButton.focus(), 0);
   };
 
   const closeModal = () => {
@@ -177,6 +185,11 @@ function initLogoGalleryModal() {
     modalImage.src = '';
     modalTitle.textContent = '';
     modalCaption.textContent = '';
+    
+    // Return focus to the element that opened the modal
+    if (previouslyFocusedElement) {
+      setTimeout(() => previouslyFocusedElement.focus(), 0);
+    }
   };
 
   cards.forEach((card) => {

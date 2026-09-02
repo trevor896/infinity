@@ -5,11 +5,19 @@ if (mobileMenuToggle && mobileMenu) {
     const closeMobileMenu = () => {
         mobileMenu.classList.remove('is-open');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.focus();
     };
 
     mobileMenuToggle.addEventListener('click', () => {
         const isOpen = mobileMenu.classList.toggle('is-open');
         mobileMenuToggle.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) {
+            // Focus first link when menu opens for keyboard users
+            const firstLink = mobileMenu.querySelector('a');
+            if (firstLink) {
+                setTimeout(() => firstLink.focus(), 0);
+            }
+        }
     });
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
