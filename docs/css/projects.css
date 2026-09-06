@@ -180,6 +180,11 @@ body {
   background: rgba(15, 24, 29, 0.7);
 }
 
+.uiux-vision-card img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
 .poster-card img {
   aspect-ratio: 4 / 5;
 }
