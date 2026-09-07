@@ -185,6 +185,21 @@ body {
   object-fit: contain;
 }
 
+.uiux-furniture-card img {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+}
+
+.uiux-showcase .compact-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.uiux-showcase .project-link {
+  margin-top: auto;
+}
+
 .poster-card img {
   aspect-ratio: 4 / 5;
 }
