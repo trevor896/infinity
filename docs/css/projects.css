@@ -152,6 +152,10 @@ body {
   gap: 1rem;
 }
 
+#analytics-showcase .compact-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .compact-card {
   display: flex;
   flex-direction: column;
@@ -202,6 +206,11 @@ body {
 
 .poster-card img {
   aspect-ratio: 4 / 5;
+}
+
+.analytics-card img {
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
 }
 
 .compact-card__body {
@@ -390,6 +399,10 @@ body {
 
   .compact-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  #analytics-showcase .compact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

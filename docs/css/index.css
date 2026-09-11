@@ -974,6 +974,11 @@ h1 .highlight {
   aspect-ratio: 4 / 5;
 }
 
+.home-project-card--analytics img {
+  aspect-ratio: 2 / 1;
+  object-fit: contain;
+}
+
 .home-project-card__body {
   padding: 0.85rem 0.85rem 1rem;
   display: grid;
