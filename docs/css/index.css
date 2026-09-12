@@ -940,6 +940,10 @@ h1 .highlight {
   gap: 1rem;
 }
 
+#home-analytics .home-project-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .home-project-card {
   display: flex;
   flex-direction: column;
@@ -1263,6 +1267,10 @@ h1 .highlight {
 
   .home-project-grid {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  #home-analytics .home-project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .home-project-showcase {
