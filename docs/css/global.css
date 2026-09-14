@@ -347,16 +347,16 @@ footer {
   font-size: var(--fs-sm); /* Smaller font size for footer */
   padding: var(--spacing-lg) var(--spacing-md); /* Padding for top/bottom and left/right */
   text-align: center; /* Center the text in footer */
+  overflow: hidden;
 }
 footer .footer-container > div {
-  flex: 1; /* Each section takes equal space */
-  min-width: 200px; /* Minimum width for responsiveness */
+  min-width: 0;
+  width: 100%;
 }
 footer .footer-container {
-  display: flex; /* Flexbox layout for footer content */
-  justify-content: space-between; /* Space between left and right sections */
-  align-items: flex-start; /* Align items to the top */
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: var(--spacing-lg); /* Space between each item */
   margin-bottom: var(--spacing-md); /* Space below the footer container */
 }
@@ -381,11 +381,12 @@ footer .footer-logo p {
 }
 footer .footer-logo .footer-social-links {
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 .footer-social-links a {
   display: inline-block;
-  margin-right: var(--spacing-sm);
-  gap: var(--spacing-sm);
+  margin-right: 0;
   padding: var(--spacing-xs);
   color: var(--text-color);
 }
@@ -442,6 +443,7 @@ footer .footer-contact {
   color: var(--muted-text); /* Soft grey text for footer contact info */
   margin: 0; /* Remove default margin */
   text-align: left; /* Align text to the left */
+  overflow-wrap: anywhere;
 }
 
 .footer-contact a,
@@ -457,4 +459,38 @@ footer .footer-contact {
 
 .footer-contact a:hover {
   color: var(--secondary-color);
+}
+
+@media (max-width: 720px) {
+  footer {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  footer .footer-container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  footer .footer-logo h2,
+  footer .footer-logo p,
+  footer .footer-contact p {
+    text-align: center;
+  }
+
+  footer .footer-logo .footer-social-links {
+    justify-content: center;
+  }
+
+  footer .footer-container .footer-links,
+  footer .footer-contact {
+    align-items: center;
+  }
+
+  footer .footer-links ul {
+    text-align: center;
+  }
+
+  footer .footer-links ul li a {
+    text-align: center;
+  }
 }

@@ -241,6 +241,7 @@
                         <span class="home-project-tag">HTML, CSS, JavaScript</span>
                         <h3>Accommodation</h3>
                         <p>A polished accommodation website designed to make stays easy to explore.</p>
+                        <a class="home-project-link" href="https://trevor896.github.io/Accommodation/" target="_blank" rel="noopener noreferrer">View project</a>
                     </div>
                 </article>
                 <article class="home-project-card" tabindex="0">
@@ -249,6 +250,7 @@
                         <span class="home-project-tag">HTML, CSS, JavaScript</span>
                         <h3>Food</h3>
                         <p>A vibrant food experience focused on clear presentation and easy browsing.</p>
+                        <a class="home-project-link" href="https://trevor896.github.io/food/" target="_blank" rel="noopener noreferrer">View project</a>
                     </div>
                 </article>
                 <article class="home-project-card" tabindex="0">
@@ -257,6 +259,7 @@
                         <span class="home-project-tag">HTML, CSS, JavaScript</span>
                         <h3>Cookie</h3>
                         <p>A playful product-focused website built around visual appeal and simple interaction.</p>
+                        <a class="home-project-link" href="https://trevor896.github.io/cookie/" target="_blank" rel="noopener noreferrer">View project</a>
                     </div>
                 </article>
             </div>
@@ -270,6 +273,7 @@
                         <span class="home-project-tag">Microsoft Excel</span>
                         <h3>Insurance Claim Analysis</h3>
                         <p>An Excel project exploring insurance purchase and claim data through practical analysis.</p>
+                        <a class="home-project-link" href="assets/Projects/Analytics/insurance%20purchase%20excel%20project.xlsx" target="_blank" rel="noopener noreferrer">View project</a>
                     </div>
                 </article>
                 <article class="home-project-card home-project-card--analytics" tabindex="0">
@@ -278,6 +282,7 @@
                         <span class="home-project-tag">Microsoft Power BI</span>
                         <h3>Cybersecurity Threat Dashboard</h3>
                         <p>A Power BI dashboard tracking company health, incident trends, response time, threat sources, and security performance.</p>
+                        <a class="home-project-link" href="assets/Projects/Analytics/Cybersec%20dashboard.pbix" target="_blank" rel="noopener noreferrer">View project</a>
                     </div>
                 </article>
             </div>
@@ -368,11 +373,12 @@
         <div class="home-project-showcase" id="home-uiux">
             <div class="home-project-grid">
                 <article class="home-project-card" tabindex="0">
-                    <img src="assets/Projects/UI UX Design/cookie.jpg" alt="Cookie product UI concept" data-title="Cookie Product">
+                    <img src="assets/Projects/UI UX Design/Apple vision pro.png" alt="Netflix Vision Pro movie site UI UX design" data-title="Netflix Vision Pro">
                     <div class="home-project-card__body">
                         <span class="home-project-tag">Figma</span>
-                        <h3>Cookie Product</h3>
-                        <p>Packaging-inspired interface focused on product attraction and clarity.</p>
+                        <h3>Netflix Vision Pro</h3>
+                        <p>A modern Netflix movie site designed in Figma with minimal prototyping.</p>
+                        <a class="home-project-link" href="https://www.figma.com/proto/zxKECL3e6exT0CyM8F6z1J/Movie-site?node-id=37-626&amp;p=f&amp;t=467pjFrJPtRE1zyy-1&amp;scaling=scale-down&amp;content-scaling=fixed&amp;page-id=0%3A1&amp;starting-point-node-id=37%3A626" target="_blank" rel="noopener noreferrer">View project</a>
                     </div>
                 </article>
                 <article class="home-project-card" tabindex="0">
@@ -381,14 +387,7 @@
                         <span class="home-project-tag">Figma</span>
                         <h3>Furniture Store</h3>
                         <p>A modern Figma store experience for wooden furniture and clear interface states.</p>
-                    </div>
-                </article>
-                <article class="home-project-card" tabindex="0">
-                    <img src="assets/Projects/UI UX Design/Apple vision pro.png" alt="Netflix Vision Pro movie site UI UX design" data-title="Netflix Vision Pro">
-                    <div class="home-project-card__body">
-                        <span class="home-project-tag">Figma</span>
-                        <h3>Netflix Vision Pro</h3>
-                        <p>A modern Netflix movie site designed in Figma with minimal prototyping.</p>
+                        <a class="home-project-link" href="https://www.figma.com/design/JKoh9jP8vtYyY48zr6nAcR/Furniture-store?node-id=0-1&amp;t=eqSxL9l34DOlto3M-1" target="_blank" rel="noopener noreferrer">View project</a>
                     </div>
                 </article>
             </div>
@@ -564,6 +563,9 @@
             };
 
             card.addEventListener('click', openHomeLightbox);
+            card.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', (event) => event.stopPropagation());
+            });
             card.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();

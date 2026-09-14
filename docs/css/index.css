@@ -1018,6 +1018,30 @@ h1 .highlight {
   line-height: 1.55;
 }
 
+.home-project-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  background: var(--primary-color);
+  color: #06100d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.home-project-link:hover,
+.home-project-link:focus-visible {
+  background: #ffffff;
+  transform: translateY(-2px);
+}
+
 .home-project-lightbox {
   position: fixed;
   inset: 0;
@@ -1270,7 +1294,7 @@ h1 .highlight {
   }
 
   #home-analytics .home-project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .home-project-showcase {
