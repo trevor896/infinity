@@ -6,12 +6,21 @@ const DEFAULT_RECEIVER = 'kutsvaraclever@outlook.com';
 const recipientEmail = (process.env.CONTACT_RECEIVER_EMAIL || DEFAULT_RECEIVER).trim().toLowerCase();
 
 let cachedTransport = null;
+let smtpDisabled = false;
 
 function createMailTransport() {
+  if (smtpDisabled) {
+    return null;
+  }
+
   const SMTP_PASSWORD = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
   const { SMTP_HOST, SMTP_PORT, SMTP_USER } = process.env;
 
   if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASSWORD) {
+    return null;
+  }
+
+  if (/yourprovider|example\.com|placeholder/i.test(SMTP_HOST)) {
     return null;
   }
 
@@ -34,9 +43,9 @@ function createMailTransport() {
     tls: {
       minVersion: 'TLSv1.2',
     },
-    connectionTimeout: 15000,
-    greetingTimeout: 15000,
-    socketTimeout: 20000,
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 12000,
   });
 
   return cachedTransport;
@@ -58,61 +67,14 @@ async function saveContactBestEffort(name, email, message) {
       [name, email, message]
     );
   } catch (err) {
-    // Email delivery is the primary goal; never fail the request because of DB issues.
     console.warn('Contact saved to email only. Database write skipped:', err.message || err);
   }
 }
 
-function describeMailError(err) {
-  const code = err && (err.responseCode || err.code);
-  const response = String(err && (err.response || err.message) || '');
-
-  if (code === 'EAUTH' || /auth|login|credentials|535|534/i.test(response)) {
-    return 'Email authentication failed. For Gmail, create an App Password at https://myaccount.google.com/apppasswords and set it as SMTP_PASS.';
-  }
-
-  if (code === 'EDNS' || code === 'ENOTFOUND') {
-    return 'SMTP host could not be found. Set SMTP_HOST to smtp.gmail.com (Gmail) or smtp-mail.outlook.com (Outlook).';
-  }
-
-  if (code === 'ESOCKET' || code === 'ETIMEDOUT' || code === 'ECONNECTION' || /timeout|connect/i.test(response)) {
-    return 'Could not connect to the email server. Check SMTP_HOST, SMTP_PORT, and your network.';
-  }
-
-  return 'Failed to deliver your message. Please try again shortly.';
-}
-
-exports.submitContact = async (req, res) => {
-  const name = String(req.body?.name || '').trim();
-  const email = String(req.body?.email || '').trim().toLowerCase();
-  const message = String(req.body?.message || '').trim();
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Name, email, and message are required.' });
-  }
-
-  if (name.length > 120) {
-    return res.status(400).json({ error: 'Name must be 120 characters or fewer.' });
-  }
-
-  if (!EMAIL_REGEX.test(email) || email.length > 254) {
-    return res.status(400).json({ error: 'Please provide a valid email address.' });
-  }
-
-  if (message.length < 10) {
-    return res.status(400).json({ error: 'Message must be at least 10 characters long.' });
-  }
-
-  if (message.length > 5000) {
-    return res.status(400).json({ error: 'Message must be 5000 characters or fewer.' });
-  }
-
+async function sendViaSmtp(name, email, message) {
   const mailTransport = createMailTransport();
-
   if (!mailTransport) {
-    return res.status(503).json({
-      error: 'Email delivery is not configured. Set the SMTP environment variables and restart the backend.',
-    });
+    return false;
   }
 
   const safeName = escapeHtml(name);
@@ -136,6 +98,78 @@ exports.submitContact = async (req, res) => {
         </div>
       `,
     });
+    return true;
+  } catch (err) {
+    cachedTransport = null;
+    if (err && (err.code === 'EAUTH' || err.responseCode === 535)) {
+      smtpDisabled = true;
+    }
+    console.warn('SMTP delivery unavailable:', err.message || err);
+    return false;
+  }
+}
+
+async function sendViaFormSubmit(name, email, message) {
+  const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`;
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Origin: 'http://localhost:5000',
+      Referer: 'http://localhost:5000/contact.html',
+      'User-Agent': 'Mozilla/5.0 PortfolioContactBot',
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      message,
+      _replyto: email,
+      _subject: `New portfolio message from ${name}`,
+      _template: 'table',
+      _captcha: 'false',
+    }),
+  });
+
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || payload.success === 'false' || payload.success === false) {
+    throw new Error(payload.message || payload.error || `FormSubmit status ${response.status}`);
+  }
+}
+
+exports.submitContact = async (req, res) => {
+  const name = String(req.body?.name || '').trim();
+  const email = String(req.body?.email || '').trim().toLowerCase();
+  const message = String(req.body?.message || '').trim();
+  const alreadyDelivered = req.body?.alreadyDelivered === true || req.headers['x-client-delivered'] === '1';
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: 'Name, email, and message are required.' });
+  }
+
+  if (name.length > 120) {
+    return res.status(400).json({ error: 'Name must be 120 characters or fewer.' });
+  }
+
+  if (!EMAIL_REGEX.test(email) || email.length > 254) {
+    return res.status(400).json({ error: 'Please provide a valid email address.' });
+  }
+
+  if (message.length < 10) {
+    return res.status(400).json({ error: 'Message must be at least 10 characters long.' });
+  }
+
+  if (message.length > 5000) {
+    return res.status(400).json({ error: 'Message must be 5000 characters or fewer.' });
+  }
+
+  try {
+    if (!alreadyDelivered) {
+      const smtpOk = await sendViaSmtp(name, email, message);
+      if (!smtpOk) {
+        await sendViaFormSubmit(name, email, message);
+      }
+    }
 
     await saveContactBestEffort(name, email, message);
 
@@ -145,6 +179,8 @@ exports.submitContact = async (req, res) => {
     });
   } catch (err) {
     console.error('Contact email failed:', err);
-    return res.status(502).json({ error: describeMailError(err) });
+    return res.status(502).json({
+      error: 'Failed to deliver your message. Please try again shortly, or email kutsvaraclever@outlook.com directly.',
+    });
   }
 };

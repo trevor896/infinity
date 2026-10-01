@@ -106,6 +106,47 @@ async function populateProjects() {
   }
 }
 
+const CONTACT_RECEIVER_EMAIL = 'kutsvaraclever@outlook.com';
+
+async function sendContactEmail(payload) {
+  const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_RECEIVER_EMAIL}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      name: payload.name,
+      email: payload.email,
+      message: payload.message,
+      _replyto: payload.email,
+      _subject: `New portfolio message from ${payload.name}`,
+      _template: 'table',
+      _captcha: 'false'
+    }),
+    cache: 'no-store'
+  });
+
+  const result = await response.json().catch(() => ({}));
+  const activationNeeded = typeof result.message === 'string' && /activat/i.test(result.message);
+
+  if (activationNeeded) {
+    const activationError = new Error(
+      'Check kutsvaraclever@outlook.com for a FormSubmit activation email, click “Activate Form”, then submit again.'
+    );
+    activationError.code = 'ACTIVATION_REQUIRED';
+    throw activationError;
+  }
+
+  if (!response.ok || result.success === 'false' || result.success === false) {
+    throw new Error(result.message || result.error || `Delivery failed (${response.status})`);
+  }
+
+  // Best-effort backend log after browser delivery succeeds.
+  apiPost('/contact', { ...payload, alreadyDelivered: true }).catch(() => {});
+  return result;
+}
+
 async function submitContactForm(event) {
   event.preventDefault();
   const form = event.currentTarget;
@@ -148,16 +189,21 @@ async function submitContactForm(event) {
   }
 
   try {
-    await apiPost('/contact', payload);
+    await sendContactEmail(payload);
     form.reset();
     status.textContent = 'Message sent successfully! I will reply soon.';
     status.className = 'form-status form-status--success';
   } catch (error) {
-    const errorMessage = error instanceof TypeError && error.message === 'Failed to fetch'
-      ? 'The contact service is unavailable. Please try again later.'
-      : `Failed to send message. ${error.message}`;
-    status.textContent = errorMessage;
-    status.className = 'form-status form-status--error';
+    if (error && error.code === 'ACTIVATION_REQUIRED') {
+      status.textContent = error.message;
+      status.className = 'form-status form-status--pending';
+    } else {
+      const errorMessage = error instanceof TypeError && error.message === 'Failed to fetch'
+        ? 'The contact service is unavailable. Please try again later.'
+        : `Failed to send message. ${error.message}`;
+      status.textContent = errorMessage;
+      status.className = 'form-status form-status--error';
+    }
     console.error(error);
   } finally {
     if (submitButton) {
