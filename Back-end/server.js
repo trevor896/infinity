@@ -33,10 +33,18 @@ const apiLimiter = rateLimit({
   message: { error: 'Too many requests. Please try again later.' },
 });
 
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many contact submissions. Please try again later.' },
+});
+
 app.use('/api', apiLimiter);
 app.use('/api/projects', projectsRouter);
 app.use('/api/skills', skillsRouter);
-app.use('/api/contact', contactRouter);
+app.use('/api/contact', contactLimiter, contactRouter);
 app.use('/api/site', siteRouter);
 
 app.get('/api/status', (req, res) => {
@@ -75,4 +83,17 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
   console.log(`Portfolio app running on http://localhost:${port}`);
+
+  const smtpHost = process.env.SMTP_HOST;
+  const smtpUser = process.env.SMTP_USER;
+  const smtpPass = process.env.SMTP_PASS || process.env.SMTP_PASSWORD;
+  const receiver = process.env.CONTACT_RECEIVER_EMAIL || 'kutsvaraclever@outlook.com';
+
+  if (!smtpHost || !smtpUser || !smtpPass) {
+    console.warn('Contact email is NOT ready: missing SMTP_HOST, SMTP_USER, or SMTP_PASS in Back-end/.env');
+  } else if (/yourprovider|example\.com|your-/i.test(smtpHost) || /your-|example/i.test(smtpUser)) {
+    console.warn('Contact email looks misconfigured: replace placeholder SMTP values in Back-end/.env');
+  } else {
+    console.log(`Contact email ready: send via ${smtpUser} → ${receiver}`);
+  }
 });

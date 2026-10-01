@@ -110,6 +110,7 @@ async function submitContactForm(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const status = document.getElementById('form-status');
+  const submitButton = form?.querySelector('button[type="submit"]');
 
   if (!form || !status) return;
 
@@ -132,8 +133,19 @@ async function submitContactForm(event) {
     return;
   }
 
+  if (payload.message.length < 10) {
+    status.textContent = 'Message must be at least 10 characters long.';
+    status.className = 'form-status form-status--error';
+    return;
+  }
+
   status.textContent = 'Sending your message...';
   status.className = 'form-status form-status--pending';
+
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.setAttribute('aria-busy', 'true');
+  }
 
   try {
     await apiPost('/contact', payload);
@@ -147,6 +159,11 @@ async function submitContactForm(event) {
     status.textContent = errorMessage;
     status.className = 'form-status form-status--error';
     console.error(error);
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.removeAttribute('aria-busy');
+    }
   }
 }
 
