@@ -156,6 +156,10 @@ body {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+#uiux-showcase .compact-grid {
+  grid-auto-rows: 1fr;
+}
+
 .compact-card {
   display: flex;
   flex-direction: column;
@@ -194,13 +198,18 @@ body {
   object-fit: contain;
 }
 
-.uiux-showcase .compact-card__body {
+.uiux-diner-card img {
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+}
+
+#uiux-showcase .compact-card__body {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.uiux-showcase .project-link {
+#uiux-showcase .project-link {
   margin-top: auto;
 }
 
